@@ -6,7 +6,7 @@ var query = 'MATCH \
   (user:User {firstName: {name}}) \
   -[relation]-> \
   (follows:User) \
-  RETURN user.firstName, relation, follows.firstName';
+  RETURN user, relation, follows.firstName';
 
 db.query(query, {
   name: 'Adam'

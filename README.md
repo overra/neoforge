@@ -9,7 +9,7 @@ Currently only Cypher queries via REST are possible.
 
 ### Getting started
 
-Create an instance of the Neo object and make a simple query.
+Create an instance of the Neo class and make a simple query.
 
 ```js
 var Neo = require('neoforge');
@@ -20,7 +20,7 @@ var query = 'MATCH \
   (user:User {firstName: {name}}) \
   -[relation]-> \
   (follows:User) \
-  RETURN user.firstName, relation, follows.firstName';
+  RETURN user, relation, follows.firstName';
 
 db.query(query, {name: 'Adam'}, function (err, rows) {
   if (err) throw err;
@@ -33,7 +33,28 @@ Which outputs this object:
 ```json
 [
   {
-    "user.firstName": "Adam",
+    "user": {
+      "lastName": "Snodgrass",
+      "displayName": "overra",
+      "firstName": "Adam",
+      "metadata": {
+        "labels": "http://localhost:7474/db/data/node/0/labels",
+        "outgoing_relationships": "http://localhost:7474/db/data/node/0/relationships/out",
+        "all_typed_relationships": "http://localhost:7474/db/data/node/0/relationships/all/{-list|&|types}",
+        "traverse": "http://localhost:7474/db/data/node/0/traverse/{returnType}",
+        "property": "http://localhost:7474/db/data/node/0/properties/{key}",
+        "self": "http://localhost:7474/db/data/node/0",
+        "outgoing_typed_relationships": "http://localhost:7474/db/data/node/0/relationships/out/{-list|&|types}",
+        "properties": "http://localhost:7474/db/data/node/0/properties",
+        "incoming_relationships": "http://localhost:7474/db/data/node/0/relationships/in",
+        "extensions": {},
+        "create_relationship": "http://localhost:7474/db/data/node/0/relationships",
+        "paged_traverse": "http://localhost:7474/db/data/node/0/paged/traverse/{returnType}{?pageSize,leaseTime}",
+        "all_relationships": "http://localhost:7474/db/data/node/0/relationships/all",
+        "incoming_typed_relationships": "http://localhost:7474/db/data/node/0/relationships/in/{-list|&|types}"
+      },
+      "node": "0"
+    },
     "relation": {
       "followDate": 1390881336185,
       "metadata": {
@@ -50,7 +71,28 @@ Which outputs this object:
     "follows.firstName": "Amber"
   },
   {
-    "user.firstName": "Adam",
+    "user": {
+      "lastName": "Snodgrass",
+      "displayName": "overra",
+      "firstName": "Adam",
+      "metadata": {
+        "labels": "http://localhost:7474/db/data/node/0/labels",
+        "outgoing_relationships": "http://localhost:7474/db/data/node/0/relationships/out",
+        "all_typed_relationships": "http://localhost:7474/db/data/node/0/relationships/all/{-list|&|types}",
+        "traverse": "http://localhost:7474/db/data/node/0/traverse/{returnType}",
+        "property": "http://localhost:7474/db/data/node/0/properties/{key}",
+        "self": "http://localhost:7474/db/data/node/0",
+        "outgoing_typed_relationships": "http://localhost:7474/db/data/node/0/relationships/out/{-list|&|types}",
+        "properties": "http://localhost:7474/db/data/node/0/properties",
+        "incoming_relationships": "http://localhost:7474/db/data/node/0/relationships/in",
+        "extensions": {},
+        "create_relationship": "http://localhost:7474/db/data/node/0/relationships",
+        "paged_traverse": "http://localhost:7474/db/data/node/0/paged/traverse/{returnType}{?pageSize,leaseTime}",
+        "all_relationships": "http://localhost:7474/db/data/node/0/relationships/all",
+        "incoming_typed_relationships": "http://localhost:7474/db/data/node/0/relationships/in/{-list|&|types}"
+      },
+      "node": "0"
+    },
     "relation": {
       "followDate": 1391186651565,
       "metadata": {
@@ -68,3 +110,8 @@ Which outputs this object:
   }
 ]
 ```
+
+## TODO
+
+- Create Node and Relationship classes with methods to query for labels and other metadata
+- Create chainable methods for batch, transactional and cypher queries
